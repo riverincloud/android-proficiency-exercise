@@ -19,6 +19,10 @@ import org.json.JSONObject;
 
 /**
  * Created by Di on 1/04/2015.
+ *
+ * This is the only Activity of the app.
+ * It would ingest a json feed and display the content in a ListView,
+ * which can be refreshed using swipe.
  */
 public class MainActivity extends ActionBarActivity {
 
@@ -28,7 +32,6 @@ public class MainActivity extends ActionBarActivity {
     private String listTitle = "";
     private List<Row> rowList = new ArrayList<Row>();
 
-    private TextView titleTextView;
     private ListView rowListView;
     private RowAdapter rowAdapter;
     private SwipeRefreshLayout swipeLayout;
@@ -38,15 +41,14 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        titleTextView = (TextView) findViewById(R.id.listTitle);
-        titleTextView.setText("Loading...");
+        setTitle("Loading...");
         rowListView = (ListView) findViewById(R.id.listView);
 
         parseJsonFeed();
 
         rowAdapter = new RowAdapter(this, rowList);
         rowListView.setAdapter(rowAdapter);
-        Log.d(TAG, "***** rowListView.setAdapter(rowAdapter) called");
+        Log.d(TAG, "***** rowListView.setAdapter(rowAdapter) called *****");
 
         swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
         swipeLayout.setOnRefreshListener(
@@ -55,7 +57,7 @@ public class MainActivity extends ActionBarActivity {
                     public void onRefresh() {
                         rowList.clear();
                         rowAdapter.notifyDataSetChanged();
-                        titleTextView.setText("Reloading...");
+                        setTitle("Reloading...");
                         parseJsonFeed();
                         // Stop the refreshing indicator
                         swipeLayout.setRefreshing(false);
@@ -76,8 +78,6 @@ public class MainActivity extends ActionBarActivity {
                                 listTitle = response.getString("title");
 
                                 JSONArray rowsJson = response.getJSONArray("rows");
-                                Log.d(TAG, "***** rowsJson.toString(): " + rowsJson.toString());
-
                                 for(int i = 0; i < rowsJson.length() ; i++) {
                                     JSONObject rowJson = rowsJson.getJSONObject(i);
                                     String title = rowJson.getString("title");
@@ -91,13 +91,13 @@ public class MainActivity extends ActionBarActivity {
                                         rowList.add(row);
                                     }
                                 }
-                                titleTextView.setText(listTitle);
+                                setTitle(listTitle);
                                 rowAdapter.notifyDataSetChanged();
 
                             } catch(Exception e) {
-                                titleTextView.setText("Loading failed!");
-                                e.printStackTrace();
+                                setTitle("Loading failed!");
                                 Log.e(TAG, "***** Fail to parse json: " + e.getMessage());
+                                e.printStackTrace();
                             }
                         }
                     }

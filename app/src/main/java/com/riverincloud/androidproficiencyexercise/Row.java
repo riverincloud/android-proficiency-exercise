@@ -3,7 +3,7 @@ package com.riverincloud.androidproficiencyexercise;
 /**
  * Created by Di on 1/04/2015.
  *
- *
+ * A object of the Row class represents a row of the list of rows from the json feed.
  */
 public class Row {
 

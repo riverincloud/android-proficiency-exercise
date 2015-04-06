@@ -7,17 +7,6 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/listTitle"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/text_padding"
-        android:gravity="center"
-        android:textSize="24dp"
-        android:textStyle="bold"
-        android:text="This is"
-        android:textIsSelectable="false"/>
-
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh"
         android:layout_width="fill_parent"

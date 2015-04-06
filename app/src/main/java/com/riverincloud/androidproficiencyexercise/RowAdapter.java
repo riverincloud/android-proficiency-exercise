@@ -13,6 +13,8 @@ import com.android.volley.toolbox.NetworkImageView;
 
 /**
  * Created by Di on 1/04/2015.
+ *
+ * This is a custom adapter for my ListView.
  */
 public class RowAdapter extends BaseAdapter {
 
@@ -61,7 +63,7 @@ public class RowAdapter extends BaseAdapter {
 
         if (rowList.size() != 0) {
             Row row = rowList.get(i);
-            Log.d(TAG, "***** To set row " + i + ": " + row.toString());
+            Log.d(TAG, "***** Will display row " + i + ": " + row.toString());
 
             if(row.getTitle() != "null") {
                 mTitleView.setText(row.getTitle());
@@ -74,13 +76,12 @@ public class RowAdapter extends BaseAdapter {
                 mDescriptionView.setText("");
             }
             if (row.getImageHref() != "null") {
-                Log.d(TAG, "***** row " + i + " has image: " + row.getImageHref());
                 mNetworkImageView.setDefaultImageResId(R.drawable.image_loading);
                 mNetworkImageView.setErrorImageResId(R.drawable.image_error);
                 mNetworkImageView.setImageUrl(row.getImageHref(), mImageLoader);
-                Log.d(TAG, "***** row " + i + " image is set");
+                Log.d(TAG, "***** row " + i + ": Image is loaded *****");
             } else {
-                Log.d(TAG, "***** row \" + i + \": No image!!");
+                Log.d(TAG, "***** row " + i + ": No image *****");
                 mNetworkImageView.setImageUrl(NO_IMAGE_ICON, mImageLoader);
             }
         }

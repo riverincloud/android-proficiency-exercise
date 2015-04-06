@@ -8,6 +8,10 @@ import com.android.volley.toolbox.Volley;
 
 /**
  * Created by Di on 1/04/2015.
+ *
+ * The singleton class encapsulates Volley's RequestQueue and ImageLoader functionality.
+ * The RequestQueue and ImageLoader would be instantiated with the Application context,
+ * therefore last for the lifetime of the app.
  */
 public class MySingleton {
 

@@ -8,6 +8,9 @@ import com.android.volley.toolbox.ImageLoader.ImageCache;
 
 /**
  * Created by Di on 1/04/2015.
+ *
+ * This class is a custom in-memory LRU bitmap cache that implements the
+ * ImageLoader.ImageCache interface, in order to use ImageLoader.
  */
 public class MyLruBitmapCache extends LruCache<String, Bitmap> implements ImageCache {
 
